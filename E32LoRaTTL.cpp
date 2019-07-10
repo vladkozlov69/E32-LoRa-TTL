@@ -324,39 +324,24 @@ void E32LoRaTTL::Reset_module()
 
 RET_STATUS E32LoRaTTL::ReceiveMsg(uint8_t *pdatabuf, uint8_t *data_len)
 {
+    SwitchMode(MODE_0_NORMAL);
 
-  RET_STATUS STATUS = RET_SUCCESS;
-  uint8_t idx;
+    int idx = 0; 
+    int avail = 0;
 
-  SwitchMode(MODE_0_NORMAL);
-  *data_len = m_LoRa->available();
-
-  if (*data_len > 0)
-  {
-    if (m_Debug != NULL)
+    while (((avail = m_LoRa->available()) > 0) || (digitalRead(this->m_AUX) == LOW))
     {
-      m_Debug->print("ReceiveMsg: ");  m_Debug->print(*data_len);  m_Debug->println(" bytes.");
+        if (avail > 0)
+        {
+            *(pdatabuf+idx) = m_LoRa->read();
+            idx++;
+        }
     }
 
-    for(idx=0;idx<*data_len;idx++)
-      *(pdatabuf+idx) = m_LoRa->read();
+    *data_len = idx;
+    *(pdatabuf+idx) = NULL;
 
-    if (m_Debug != NULL)
-    {
-      for(idx=0;idx<*data_len;idx++)
-      {
-        m_Debug->print(" 0x");
-        m_Debug->print(0xFF & *(pdatabuf+idx), HEX);    // print as an ASCII-encoded hexadecimal
-        m_Debug->println("");
-      }
-    }
-  }
-  else
-  {
-    STATUS = RET_NOT_IMPLEMENT;
-  }
-
-  return STATUS;
+    return idx > 0 ? RET_SUCCESS : RET_NOT_IMPLEMENT;
 }
 
 RET_STATUS E32LoRaTTL::SendMsg(uint8_t addrH, uint8_t addrL, AIR_CHAN_TYPE channel, 
