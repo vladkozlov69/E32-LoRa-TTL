@@ -332,7 +332,7 @@ RET_STATUS E32LoRaTTL::ReceiveMsg(uint8_t *pdatabuf, uint8_t *data_len)
     }
 
     *data_len = idx;
-    *(pdatabuf+idx) = NULL;
+    *(pdatabuf+idx) = 0;
 
     return idx > 0 ? RET_SUCCESS : RET_NOT_IMPLEMENT;
 }
