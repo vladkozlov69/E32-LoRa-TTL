@@ -9,6 +9,7 @@ typedef enum
     RET_ERROR_UNKNOWN,	/* something shouldn't happened */
     RET_NOT_SUPPORT,
     RET_NOT_IMPLEMENT,
+    RET_NOT_READY,
     RET_NOT_INITIAL,
     RET_INVALID_PARAM,
     RET_DATA_SIZE_NOT_MATCH,

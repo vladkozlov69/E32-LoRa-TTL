@@ -346,14 +346,14 @@ RET_STATUS E32LoRaTTL::SendMsg(uint8_t addrH, uint8_t addrL, AIR_CHAN_TYPE chann
 
     if(!ready())
     {
-        return RET_NOT_IMPLEMENT;
+        return RET_NOT_READY;
     }
 
     delay(10);
 
     if(!ready())
     {
-        return RET_NOT_IMPLEMENT;
+        return RET_NOT_READY;
     }
 
     if (m_TransmissionMode == TRANSMISSION_MODE::TRSM_FP_MODE)
