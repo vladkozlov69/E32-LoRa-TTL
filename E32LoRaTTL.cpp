@@ -340,16 +340,7 @@ RET_STATUS E32LoRaTTL::ReceiveMsg(uint8_t *pdatabuf, uint8_t *data_len)
 RET_STATUS E32LoRaTTL::SendMsg(uint8_t addrH, uint8_t addrL, AIR_CHAN_TYPE channel, 
                                 uint8_t *pdatabuf, uint8_t data_len)
 {
-    RET_STATUS STATUS = RET_SUCCESS;
-
     SwitchMode(MODE_0_NORMAL);
-
-    if(!ready())
-    {
-        return RET_NOT_READY;
-    }
-
-    delay(10);
 
     if(!ready())
     {
@@ -365,6 +356,6 @@ RET_STATUS E32LoRaTTL::SendMsg(uint8_t addrH, uint8_t addrL, AIR_CHAN_TYPE chann
 
     m_LoRa->write(pdatabuf, data_len);
 
-  return STATUS;
+  return RET_SUCCESS;
 }
 
