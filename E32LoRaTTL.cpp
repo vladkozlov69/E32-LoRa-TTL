@@ -155,7 +155,6 @@ bool E32LoRaTTL::chkModeSame(MODE_TYPE mode)
 
   if(pre_mode == mode)
   {
-    //Serial.print("SwitchMode: (no need to switch) ");  Serial.println(mode, HEX);
     return true;
   }
   else
@@ -226,7 +225,6 @@ RET_STATUS E32LoRaTTL::GetModuleInfo(uint8_t* pReadbuf, uint8_t buf_len)
   uint8_t Readcnt, idx;
 
   Readcnt = m_LoRa->available();
-  //Serial.print("softSerial.available(): ");  Serial.print(Readcnt);  Serial.println(" bytes.");
   if (Readcnt == buf_len)
   {
     for(idx=0;idx<buf_len;idx++)
@@ -316,11 +314,6 @@ void E32LoRaTTL::Reset_module()
   waitReady();
   delay(1000);
 }
-
-
-//=== Sleep mode cmd ================================-
-
-
 
 RET_STATUS E32LoRaTTL::ReceiveMsg(uint8_t *pdatabuf, uint8_t *data_len)
 {
