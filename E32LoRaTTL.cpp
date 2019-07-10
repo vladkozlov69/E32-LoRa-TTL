@@ -65,7 +65,7 @@ RET_STATUS E32LoRaTTL::SleepModeCmd(uint8_t CMD, void* pBuff)
 
   if (m_Debug != NULL)
   {
-    m_Debug->print("SleepModeCmd: 0x");  m_Debug->println(CMD, HEX);
+    m_Debug->print(F("SleepModeCmd: 0x"));  m_Debug->println(CMD, HEX);
   }
 
   waitReady();
@@ -134,7 +134,7 @@ RET_STATUS E32LoRaTTL::waitReady()
         STATUS = RET_TIMEOUT;
         if (m_Debug != NULL)
         {
-            m_Debug->println(" TimeOut");
+            m_Debug->println(F(" TimeOut"));
         }
         
     }
@@ -161,9 +161,9 @@ bool E32LoRaTTL::chkModeSame(MODE_TYPE mode)
   {
     if (m_Debug != NULL)
     {
-      m_Debug->print("SwitchMode: from ");  
+      m_Debug->print(F("SwitchMode: from "));  
       m_Debug->print(pre_mode, HEX);  
-      m_Debug->print(" to ");  
+      m_Debug->print(F(" to "));  
       m_Debug->println(mode, HEX);
     }
     pre_mode = mode;
@@ -232,7 +232,7 @@ RET_STATUS E32LoRaTTL::GetModuleInfo(uint8_t* pReadbuf, uint8_t buf_len)
       *(pReadbuf+idx) = m_LoRa->read();
       if (m_Debug != NULL)
       {
-        m_Debug->print(" 0x");
+        m_Debug->print(F(" 0x"));
         m_Debug->print(0xFF & *(pReadbuf+idx), HEX);    // print as an ASCII-encoded hexadecimal
         m_Debug->println("");
       }
@@ -244,7 +244,7 @@ RET_STATUS E32LoRaTTL::GetModuleInfo(uint8_t* pReadbuf, uint8_t buf_len)
     STATUS = RET_DATA_SIZE_NOT_MATCH;
     if (m_Debug != NULL)
     {
-      m_Debug->print("  RET_DATA_SIZE_NOT_MATCH - Readcnt: ");  m_Debug->println(Readcnt);
+      m_Debug->print(F("  RET_DATA_SIZE_NOT_MATCH - Readcnt: "));  m_Debug->println(Readcnt);
     }
     cleanUARTBuf();
   }
@@ -276,10 +276,10 @@ RET_STATUS E32LoRaTTL::Read_CFG(struct CFGstruct* pCFG)
   STATUS = GetModuleInfo((uint8_t *)pCFG, sizeof(CFGstruct));
   if((STATUS == RET_SUCCESS) && (m_Debug != NULL))
   {
-    m_Debug->print("  HEAD:     ");  m_Debug->println(pCFG->HEAD, HEX);
-    m_Debug->print("  ADDH:     ");  m_Debug->println(pCFG->ADDH, HEX);
-    m_Debug->print("  ADDL:     ");  m_Debug->println(pCFG->ADDL, HEX);
-    m_Debug->print("  CHAN:     ");  m_Debug->println(pCFG->CHAN, HEX);
+    m_Debug->print(F("  HEAD:     "));  m_Debug->println(pCFG->HEAD, HEX);
+    m_Debug->print(F("  ADDH:     "));  m_Debug->println(pCFG->ADDH, HEX);
+    m_Debug->print(F("  ADDL:     "));  m_Debug->println(pCFG->ADDL, HEX);
+    m_Debug->print(F("  CHAN:     "));  m_Debug->println(pCFG->CHAN, HEX);
   }
 
   return STATUS;
@@ -299,10 +299,10 @@ RET_STATUS E32LoRaTTL::Read_module_version(struct MVerstruct* MVer)
   STATUS = GetModuleInfo((uint8_t *)MVer, sizeof(MVerstruct));
   if((STATUS == RET_SUCCESS) && (m_Debug != NULL))
   {
-    m_Debug->print("  HEAD:     0x");  m_Debug->println(MVer->HEAD, HEX);
-    m_Debug->print("  Model:    0x");  m_Debug->println(MVer->Model, HEX);
-    m_Debug->print("  Version:  0x");  m_Debug->println(MVer->Version, HEX);
-    m_Debug->print("  features: 0x");  m_Debug->println(MVer->features, HEX);
+    m_Debug->print(F("  HEAD:     0x"));  m_Debug->println(MVer->HEAD, HEX);
+    m_Debug->print(F("  Model:    0x"));  m_Debug->println(MVer->Model, HEX);
+    m_Debug->print(F("  Version:  0x"));  m_Debug->println(MVer->Version, HEX);
+    m_Debug->print(F("  features: 0x"));  m_Debug->println(MVer->features, HEX);
   }
 
   return RET_SUCCESS;
