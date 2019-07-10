@@ -55,7 +55,7 @@ void loop()
     sprintf((char *)data_buf, "Hello [%lu]", millis());
 
     if(lora->SendMsg(DEVICE_A_ADDR_H, DEVICE_A_ADDR_L, AIR_CHAN_433M,
-        (char *)data_buf, strlen((char *)data_buf))==RET_SUCCESS)
+        (unsigned char *)data_buf, strlen((char *)data_buf))==RET_SUCCESS)
     {
         blinkLED();
     }
